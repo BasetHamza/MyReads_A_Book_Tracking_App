@@ -42,6 +42,12 @@ body,
   }
 }
 
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: lightslategray;
+  opacity: 1; /* Firefox */
+}
+
 .bookshelf-title {
   border-bottom: 1px solid #dedede;
 }
