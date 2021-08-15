@@ -1,6 +1,7 @@
 import React, {Component} from 'react' 
 import { Link } from 'react-router-dom'
 import * as BooksAPI from '../utils/BooksAPI'
+import BookCard from './BookCard'
 
 class SearchBooks extends Component{
 
@@ -10,12 +11,20 @@ class SearchBooks extends Component{
   }
 
   componentDidUpdate(prevState){
-    if(this.state.query && this.state.query !== prevState.query) {
+    /**
+     * The server returns book objects with the following keys:
+     * 
+     * {title, subtitle, authors, publisher, publishedDate, description, industryIdentifiers, readingModes, 
+     * pageCount, printType, categories, maturityRating, allowAnonLogging, contentVersion, panelizationSummary, 
+     * imageLinks{smallThumbnail, thumbnail}, language, previewLink, infoLink, canonicalVolumeLink, id})
+     */
+    this.state.query.length >= 0 && this.state.query !== prevState.query &&
         BooksAPI.search(this.state.query)
-        .then((booksObj) => {
-         this.setState({ books: [...this.state.books, booksObj] })
-        })}
-        
+        .then((books) => {
+          this.setState(() => ({
+            books
+          }))
+        })
   }
 
   updateQuery = (query) => {
@@ -44,13 +53,11 @@ class SearchBooks extends Component{
         </div>
         <div className="search-books-results">
           <ol className="books-grid">
-            <li>
             {
-this.state.books.map((book) =>
-                book.authors
+              this.state.books.map((book) => 
+                <BookCard bookData={book}/>
               )
             }
-            </li>
           </ol>
         </div>
       </div>  
@@ -59,11 +66,3 @@ this.state.books.map((book) =>
 }
 
 export default SearchBooks
-
-/*
-Objects are not valid as a React child (found: object with keys 
-  {title, subtitle, authors, publisher, publishedDate, description, industryIdentifiers, readingModes, 
-    pageCount, printType, categories, maturityRating, allowAnonLogging, contentVersion, panelizationSummary, 
-    imageLinks, language, previewLink, infoLink, canonicalVolumeLink, id}). If you meant to render a collection of 
-    children, use an array instead.
- */

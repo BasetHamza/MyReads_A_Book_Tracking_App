@@ -1,12 +1,20 @@
 import React from 'react';
 import BookShelfChanger from './BookShelfChanger'
 
+/**
+ * The server returns book objects with the following keys. You can access them using props.bookData.{key_name}
+ * 
+ * {title, subtitle, authors, publisher, publishedDate, description, industryIdentifiers, readingModes, 
+ * pageCount, printType, categories, maturityRating, allowAnonLogging, contentVersion, panelizationSummary, 
+ * imageLinks{smallThumbnail, thumbnail}, language, previewLink, infoLink, canonicalVolumeLink, id})
+ */
+
 function BookCard(props){
     return (
         <li>
             <div className="book">
                 <div className="book-top">
-                    <div className="book-cover" style={{ width: 128, height: 188, backgroundImage: `url("${props.bookData.url}")`}}></div>
+                    <div className="book-cover" style={{ width: 128, height: 188, backgroundImage: `url("${props.bookData.imageLinks.thumbnail}")`}}></div>
                     <BookShelfChanger/>
                 </div>
                 <div className="book-title">{props.bookData.title}</div>
