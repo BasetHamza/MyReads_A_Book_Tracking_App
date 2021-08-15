@@ -6,22 +6,22 @@ class SearchBooks extends Component{
 
   state = {
     query: '',
-    books: [],
+    books: []
   }
 
-  componentDidUpdate(){
-    BooksAPI.search(this.state.query)
-      .then((books) => {
-        this.setState(() => ({
-          books
-        }))
-      })
+  componentDidUpdate(prevState){
+    if(this.state.query && this.state.query !== prevState.query) {
+        BooksAPI.search(this.state.query)
+        .then((booksObj) => {
+         this.setState({ books: [...this.state.books, booksObj] })
+        })}
+        
   }
 
   updateQuery = (query) => {
     this.setState(() => ({
       query: query.trim()
-    }))
+    }))    
   }
 
   render(){
@@ -34,14 +34,6 @@ class SearchBooks extends Component{
               Close
           </Link>
           <div className="search-books-input-wrapper">
-            {/*
-              NOTES: The search from BooksAPI is limited to a particular set of search terms.
-              You can find these search terms here:
-              https://github.com/udacity/reactnd-project-myreads-starter/blob/master/SEARCH_TERMS.md
-
-              However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
-              you don't find a specific author or title. Every search is limited by search terms.
-            */}
             <input 
               type="text" 
               placeholder="Search by title or author ..."
@@ -52,11 +44,13 @@ class SearchBooks extends Component{
         </div>
         <div className="search-books-results">
           <ol className="books-grid">
-            {this.state.books.length !== 0 && this.state.books.map((book) => (
-              <li>
-                `{book.title}`
-              </li>
-            ))}
+            <li>
+            {
+this.state.books.map((book) =>
+                book.authors
+              )
+            }
+            </li>
           </ol>
         </div>
       </div>  
@@ -65,3 +59,11 @@ class SearchBooks extends Component{
 }
 
 export default SearchBooks
+
+/*
+Objects are not valid as a React child (found: object with keys 
+  {title, subtitle, authors, publisher, publishedDate, description, industryIdentifiers, readingModes, 
+    pageCount, printType, categories, maturityRating, allowAnonLogging, contentVersion, panelizationSummary, 
+    imageLinks, language, previewLink, infoLink, canonicalVolumeLink, id}). If you meant to render a collection of 
+    children, use an array instead.
+ */
