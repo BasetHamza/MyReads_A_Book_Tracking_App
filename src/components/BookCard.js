@@ -13,16 +13,14 @@ import BookShelfChanger from './BookShelfChanger'
 
 function BookCard(props){
     return (
-        <li>
-            <div className="book">
-                <div className="book-top">
-                    <div className="book-cover" style={{ width: 128, height: 188, backgroundImage: `url("${props.bookData.imageLinks.thumbnail}")`}}></div>
-                    <BookShelfChanger book={props}/>
-                </div>
-                <div className="book-title">{props.bookData.title}</div>
-                <div className="book-authors">{props.bookData.author}</div> 
+        <div className="book">
+            <div className="book-top">
+                <div className="book-cover" style={{ width: 128, height: 188, backgroundImage: `url("${props.book.imageLinks.thumbnail}")`}}></div>
+                <BookShelfChanger book={props.book}/>
             </div>
-        </li>
+            <div className="book-title">{props.book.title}</div>
+            <div className="book-authors">{props.book.authors}</div>  
+        </div>
     )
 }
 
