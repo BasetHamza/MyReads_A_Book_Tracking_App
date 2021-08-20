@@ -29,7 +29,7 @@ class SearchBooks extends Component{
 
   updateQuery = (query) => {
     this.setState(() => ({
-      query: query.trim()
+      query: query
     }))    
   }
 
@@ -59,7 +59,7 @@ class SearchBooks extends Component{
           <ol className="books-grid">
             {
               this.state.books.map((book) => 
-                <BookCard bookData={book}/>
+                <BookCard book={book}/>
               )
             }
           </ol>

@@ -9,7 +9,7 @@ class BookShelfChanger extends Component{
 
     constructor(props) {
         super(props);
-        this.state = {selectedShelf: this.search(props.book.shelf),
+        this.state = {selectedShelf: this.extractShelf(props),
             shelves: [
                 {
                     label: "Currently Reading",
@@ -29,6 +29,14 @@ class BookShelfChanger extends Component{
                 }
             ]
         };
+    }
+
+    extractShelf = (props) => {
+        if (props.book.hasOwnProperty('shelf')){
+            return this.search(props.book.shelf)
+        } else {
+            return this.search("none")
+        }
     }
 
     search(nameKey){
