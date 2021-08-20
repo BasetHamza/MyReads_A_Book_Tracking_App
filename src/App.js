@@ -7,10 +7,6 @@ import SearchBooks from './components/SearchBooks'
 
 
 class BooksApp extends React.Component {
-  state = {
-
-  }
-
   render() {
     return (
       <div className="app">

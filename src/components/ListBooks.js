@@ -6,15 +6,17 @@ import Shelf from './Shelf'
 class ListBooks extends Component{
 
   state = {
-    books: [] /**,
-    library: {
-      currentlyReading: [],
-      wantToRead: [],
-      read: []
-    } */
+    updateCount: 0,
+    books: []
   }
 
   componentDidMount() {
+    /**
+     * When the component mounts, we trigger the API call to retreive the books of the
+     * user's library. We pool all of them into the books which is the state of the ListBooks
+     * component.
+    */
+
     BooksAPI.getAll()
       .then((books) => { 
         this.setState(() => ({
@@ -24,10 +26,43 @@ class ListBooks extends Component{
       )
   }
 
-  componentDidUpdate(){
-    this.buildShelves()
+  removeBook = (book) => {
+    this.setState((currentState) => ({
+      books: currentState.books.filter((c) => {
+        return c.id !== book.id
+      })
+    }))
+
+    BooksAPI.update(book,{})
   }
-  
+
+  updateShelves = (book,newShelf) => {
+    this.setState((currentState) => ({
+      updateCount: currentState.updateCount + 1
+    }))
+    BooksAPI.update(book,newShelf)
+  }
+
+  /** 
+  updateShelves(){
+
+    for (let i=0; i < this.state.shelves.length; i++) {
+      if (this.state.books[i].id === id) {
+        this.setState((currentState) => ({
+          books: currentState.books[i] = updatedBook
+        }))
+      }
+    }
+  }
+  */
+
+  /**
+   * This function is used to build the library by organizing the books
+   * into their corresponding shelves. The books are accessed through the
+   * state books.
+   * 
+   * @returns the functions return the library object which has three arrays one for each shelf.
+   */
   buildShelves(){
     const library = {
       currentlyReading: [],
@@ -52,9 +87,16 @@ class ListBooks extends Component{
     return library;
   }
 
+
   render(){
+
+    // First, we organize the books into their corresponding shelves.
     const library = this.buildShelves();
 
+    /**
+     * Then we use the Shelf Component to build the shelf.
+     * We also have the Add button which routes us to the search page.
+    */
     return(
       <div className="list-books">
         <div className="list-books-title">
@@ -63,7 +105,12 @@ class ListBooks extends Component{
         <div className="list-books-content">
           {Object.keys(library).map( (bookShelfName) => (
             <div key={bookShelfName}>
-              <Shelf shelfName={bookShelfName} shelfContent={library[bookShelfName]}/> 
+              <Shelf 
+                shelfName={bookShelfName} 
+                shelfContent={library[bookShelfName]}
+                onDeleteBook={this.removeBook}
+                onUpdateShelves={this.updateShelves}
+              /> 
             </div>
           ))}
         </div>

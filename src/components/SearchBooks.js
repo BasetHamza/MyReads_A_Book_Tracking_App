@@ -34,6 +34,10 @@ class SearchBooks extends Component{
   }
 
   render(){
+    if (this.state.books.length > 0){
+      console.log(this.state.books)
+    }
+
     return(
       <div className="search-books">
         <div className="search-books-bar">
