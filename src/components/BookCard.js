@@ -13,8 +13,7 @@ import BookShelfChanger from './BookShelfChanger'
 
 class BookCard extends Component {    
 
-    checkAuthors = () => {
-
+    getAuthors = () => {
         if (this.props.book.hasOwnProperty('authors')) 
         {
             return this.props.book.authors
@@ -23,28 +22,20 @@ class BookCard extends Component {
         }
     }
 
-
-    checkThumbnailURL = () => {
+    getThumbnailURL = () => {
         if (this.props.book.hasOwnProperty('imageLinks'))
         {
             return this.props.book.imageLinks.thumbnail
         } else {
-            return "../utils/images/broken.jpg"
+            return "https://image.shutterstock.com/image-vector/picture-vector-icon-no-image-260nw-1732584341.jpg"
         }
     }
 
-
     render(){
-        console.log(this.props.book)
-
-        
-        const authors = this.checkAuthors()
-        const thumbnailURL = this.checkThumbnailURL()
-
         return (
             <div className="book">
                 <div className="book-top">
-                    <div className="book-cover" style={{ width: 128, height: 188, backgroundImage: `url("${thumbnailURL}")`}}>  
+                    <div className="book-cover" style={{ width: 128, height: 188, backgroundImage: `url("${this.getThumbnailURL()}")`}}>  
                     </div>
                     <BookShelfChanger 
                         book={this.props.book}
@@ -53,7 +44,7 @@ class BookCard extends Component {
                     />
                 </div>
                 <div className="book-title">{this.props.book.title}</div>
-                <div className="book-authors">{authors}</div>  
+                <div className="book-authors">{this.getAuthors()}</div>  
             </div>
         )
     }

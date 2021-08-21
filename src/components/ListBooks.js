@@ -6,7 +6,6 @@ import Shelf from './Shelf'
 class ListBooks extends Component{
 
   state = {
-    updateCount: 0,
     books: []
   }
 
@@ -34,13 +33,6 @@ class ListBooks extends Component{
     }))
 
     BooksAPI.update(book,{})
-  }
-
-  updateShelves = (book,newShelf) => {
-    this.setState((currentState) => ({
-      updateCount: currentState.updateCount + 1
-    }))
-    BooksAPI.update(book,newShelf)
   }
 
   /** 
@@ -109,7 +101,7 @@ class ListBooks extends Component{
                 shelfName={bookShelfName} 
                 shelfContent={library[bookShelfName]}
                 onDeleteBook={this.removeBook}
-                onUpdateShelves={this.updateShelves}
+                onUpdateShelves={this.props.onUpdateShelves}
               /> 
             </div>
           ))}

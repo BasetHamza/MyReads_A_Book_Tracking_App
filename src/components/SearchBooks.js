@@ -18,13 +18,24 @@ class SearchBooks extends Component{
      * pageCount, printType, categories, maturityRating, allowAnonLogging, contentVersion, panelizationSummary, 
      * imageLinks{smallThumbnail, thumbnail}, language, previewLink, infoLink, canonicalVolumeLink, id})
      */
-    this.state.query.length >= 0 && this.state.query !== prevState.query &&
+    if (this.state.query.length > 0)
+    {
+      if (this.state.query !== prevState.query)
+      {
         BooksAPI.search(this.state.query)
         .then((books) => {
           this.setState(() => ({
             books
           }))
         })
+      }
+    } else if (this.state.query.length === 0)
+    {
+      this.setState(() => ({
+        query: '',
+        books: []
+      }))
+    }
   }
 
   updateQuery = (query) => {
@@ -58,8 +69,14 @@ class SearchBooks extends Component{
         <div className="search-books-results">
           <ol className="books-grid">
             {
-              this.state.books.map((book) => 
-                <BookCard book={book}/>
+              this.state.books.map((book) => (
+                <li key={book.id}>
+                  <BookCard 
+                    book={book}
+                    onUpdateShelves={this.props.onUpdateShelves}
+                  />
+                </li>
+              )
               )
             }
           </ol>

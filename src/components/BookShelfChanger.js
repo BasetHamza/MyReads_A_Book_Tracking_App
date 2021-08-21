@@ -95,19 +95,6 @@ class BookShelfChanger extends Component{
         }
     }
 
-    /**
-    componentDidUpdate(){
-        console.log(this.props.book.shelf)
-        console.log(this.state.selectedShelf)
-        console.log(this.state.shelves)
-
-        // Updating the book's shelf in the server
-        BooksAPI.update(this.props.book,this.state.selectedShelf.value)
-
-        // TODO: We want to invoke a method that updates the books state in the ListBooks Component.
-    }
-    */
-
     render(){
         return (
             <div className="book-shelf-changer">
