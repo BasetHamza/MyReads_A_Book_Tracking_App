@@ -35,19 +35,6 @@ class ListBooks extends Component{
     BooksAPI.update(book,{})
   }
 
-  /** 
-  updateShelves(){
-
-    for (let i=0; i < this.state.shelves.length; i++) {
-      if (this.state.books[i].id === id) {
-        this.setState((currentState) => ({
-          books: currentState.books[i] = updatedBook
-        }))
-      }
-    }
-  }
-  */
-
   /**
    * This function is used to build the library by organizing the books
    * into their corresponding shelves. The books are accessed through the

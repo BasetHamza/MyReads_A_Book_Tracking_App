@@ -10,45 +10,36 @@ class SearchBooks extends Component{
     books: []
   }
 
-  componentDidUpdate(prevState){
-    /**
-     * The server returns book objects with the following keys:
-     * 
-     * {title, subtitle, authors, publisher, publishedDate, description, industryIdentifiers, readingModes, 
-     * pageCount, printType, categories, maturityRating, allowAnonLogging, contentVersion, panelizationSummary, 
-     * imageLinks{smallThumbnail, thumbnail}, language, previewLink, infoLink, canonicalVolumeLink, id})
-     */
-    if (this.state.query.length > 0)
-    {
-      if (this.state.query !== prevState.query)
-      {
-        BooksAPI.search(this.state.query)
-        .then((books) => {
-          this.setState(() => ({
-            books
-          }))
-        })
-      }
-    } else if (this.state.query.length === 0)
-    {
-      this.setState(() => ({
-        query: '',
-        books: []
-      }))
-    }
+  resetSearch = () => {
+    this.setState(() => ({
+      books: []
+    })) 
   }
 
   updateQuery = (query) => {
     this.setState(() => ({
       query: query
-    }))    
+    })) 
+
+    if (this.state.query.length > 0)
+    {
+      console.log('true')
+      BooksAPI.search(this.state.query)
+      .then((books) => {
+        this.setState(() => ({
+          books
+        }))
+      }) .catch(err => alert(err)) // TypeError: failed to fetch (the text may vary)
+
+    } else
+    {
+      console.log('false')
+      this.resetSearch()
+    }
+
   }
 
   render(){
-    if (this.state.books.length > 0){
-      console.log(this.state.books)
-    }
-
     return(
       <div className="search-books">
         <div className="search-books-bar">
