@@ -10,7 +10,7 @@ This project is the first project of the Udacity Frontend Nanodegree. The projec
     ```
 2. Go into the application folder
 
-3. Install dependencies using ```npm``` or ```yarn``` command line tool
+3. Install all project dependencies with  ```npm``` or ```yarn```
 
     ```$ npm install```
     
@@ -18,12 +18,14 @@ This project is the first project of the Udacity Frontend Nanodegree. The projec
    
    ```$ yarn install```
 
-4. 
+4. Start the application using ```npm``` or ```yarn```
 
-To get started developing right away:
-
-* install all project dependencies with `npm install`
-* start the development server with `npm start`
+    ```$ npm start```
+    
+   or
+   
+   ```$ yarn start```
+   
 
 ## What You're Getting
 ```bash
