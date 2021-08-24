@@ -18,7 +18,7 @@ class BookCard extends Component {
         {
             return this.props.book.authors
         } else {
-            return "Author not available!"
+            return "Author Unavailable!"
         }
     }
 
@@ -32,6 +32,9 @@ class BookCard extends Component {
     }
 
     render(){
+        if (this.props.book.hasOwnProperty('shelf')){
+            console.log(this.props.book)
+        }
         return (
             <div className="book">
                 <div className="book-top">

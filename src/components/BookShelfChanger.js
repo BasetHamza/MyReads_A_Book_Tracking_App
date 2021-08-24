@@ -33,7 +33,7 @@ class BookShelfChanger extends Component{
 
     extractShelf = (props) => {
         if (props.book.hasOwnProperty('shelf')){
-            console.log(props.book.shelf)
+            console.log(props.book)
             return this.search(props.book.shelf)
         } else {
             return this.search("none")
@@ -100,7 +100,10 @@ class BookShelfChanger extends Component{
                 selectedShelf: newShelf
             }
             ));
+                        console.log(this.props.book)
+
             this.props.book.shelf = newShelf.value;
+            console.log(this.props.book)
             this.props.onUpdateShelves(this.props.book,newShelf.value);
         }
     }

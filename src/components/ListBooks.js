@@ -26,7 +26,6 @@ class ListBooks extends Component{
   }
 
   removeBook = (book) => {
-    console.log("Book is updating....")
     this.setState((currentState) => ({
       books: currentState.books.filter((c) => {
         return c.id !== book.id
