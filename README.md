@@ -46,6 +46,12 @@ This project is the first project of the Udacity Frontend Nanodegree. The projec
     │   ├── add.svg
     │   ├── arrow-back.svg
     │   └── arrow-drop-down.svg
+    ├── components # A folder that contains all the React components used in this project
+    │   ├── ListBooks.js # A component responsible for presenting the current library with the three shelves to the user.
+    │   ├── Shelf.js # A component responsible for presenting a shelf in the library used by the ListBooks component
+    │   ├── SearchBooks.js # A component responsible of performing the search for books in the server.
+    │   └── BookCard.js # A component that is responsible for presenting the book card to the user.
+    │   └── BookShelfCHanger.js # A component that is used by BookCard to present the functionality of changing the shelf of a book.
     ├── index.css # Global styles. You probably won't need to change anything here.
     └── index.js # You should not need to modify this file. It is used for DOM rendering only.
 ```
