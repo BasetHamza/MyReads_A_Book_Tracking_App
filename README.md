@@ -2,7 +2,7 @@
 
 This project is the first project of the Udacity Frontend Nanodegree. The project is focused on the use of [React](https://reactjs.org/). The starting code provided by Udacity includes the HTML and CSS, but not the React functionality.
 
-## Installation Directions
+## Installation & Launching Directions
 
 1. To install the application clone this git repository or download as zip file
     ```
