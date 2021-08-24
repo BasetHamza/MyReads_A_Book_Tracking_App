@@ -1,8 +1,13 @@
 # MyReads Project
 
-This project is the first project of the Udacity Frontend Nanodegree. The project is focused on the use of [React](https://reactjs.org/)
+This project is the first project of the Udacity Frontend Nanodegree. The project is focused on the use of [React](https://reactjs.org/). The starting code provided by Udacity includes the HTML and CSS, but not the React functionality.
 
-## TL;DR
+## Installation Directions
+
+1. To install the application clone this git repository or download as zip file
+```
+$ git clone https://github.com/BasetHamza/MyReads_A_Book_Tracking_App.git
+```
 
 To get started developing right away:
 
