@@ -32,7 +32,7 @@ class Shelf extends Component {
                           <BookCard 
                             book = {book}
                             onDeleteBook={this.props.onDeleteBook}
-                            onUpdateShelves={this.props.onUpdateShelves}
+                            onUpdateShelf={this.props.onUpdateShelf}
                           />
                       </li>
                   ))

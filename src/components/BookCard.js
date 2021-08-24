@@ -32,10 +32,6 @@ class BookCard extends Component {
     }
 
     render(){
-        if (this.props.book.hasOwnProperty('shelf')){
-            console.log("This book as a shelf: ")
-            console.log(this.props.book)
-        }
         return (
             <div className="book">
                 <div className="book-top">
@@ -44,7 +40,7 @@ class BookCard extends Component {
                     <BookShelfChanger 
                         book={this.props.book}
                         onDeleteBook={this.props.onDeleteBook}
-                        onUpdateShelves={this.props.onUpdateShelves}
+                        onUpdateShelf={this.props.onUpdateShelf}
                     />
                 </div>
                 <div className="book-title">{this.props.book.title}</div>

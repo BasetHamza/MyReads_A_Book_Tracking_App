@@ -1,39 +1,8 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import * as BooksAPI from '../utils/BooksAPI'
 import Shelf from './Shelf'
 
 class ListBooks extends Component{
-
-  state = {
-    books: []
-  }
-
-  componentDidMount() {
-    /**
-     * When the component mounts, we trigger the API call to retreive the books of the
-     * user's library. We pool all of them into the books which is the state of the ListBooks
-     * component.
-    */
-
-    BooksAPI.getAll()
-      .then((books) => { 
-        this.setState(() => ({
-          books
-        }))
-      }
-      )
-  }
-
-  removeBook = (book) => {
-    this.setState((currentState) => ({
-      books: currentState.books.filter((c) => {
-        return c.id !== book.id
-      })
-    }))
-
-    BooksAPI.update(book,{})
-  }
 
   /**
    * This function is used to build the library by organizing the books
@@ -49,7 +18,7 @@ class ListBooks extends Component{
       read: []
     }
 
-    this.state.books.forEach( (book) => {
+    this.props.books.forEach( (book) => {
         if (book.shelf === "currentlyReading")
         {
           library.currentlyReading.push(book)
@@ -62,7 +31,6 @@ class ListBooks extends Component{
         }
       }
     )
-
     return library;
   }
 
@@ -87,8 +55,8 @@ class ListBooks extends Component{
               <Shelf 
                 shelfName={bookShelfName} 
                 shelfContent={library[bookShelfName]}
-                onDeleteBook={this.removeBook}
-                onUpdateShelves={this.props.onUpdateShelves}
+                onDeleteBook={this.props.onDeleteBook}
+                onUpdateShelf={this.props.onUpdateShelf}
               /> 
             </div>
           ))}

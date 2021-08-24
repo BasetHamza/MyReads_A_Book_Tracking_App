@@ -19,14 +19,14 @@ class SearchBooks extends Component{
     this.props = props;
     this.state = {
       query: '',
-      books: []
+      searchedBooks: []
     }
     this.debounceSearch = _.debounce(this.onChange, 300);
   }
 
   state = {
     query: '',
-    books: []
+    searchedBooks: []
   }
 
   updateQuery = (query) => {
@@ -45,24 +45,46 @@ class SearchBooks extends Component{
     {
       this.resetSearch()
     } else {
-      BooksAPI.search(this.state.query.trim())
-      .then((books) => {
-        if (books.error)
+      this.contactTheAPI()
+    }
+  }
+
+  contactTheAPI = () => {
+    BooksAPI.search(this.state.query.trim())
+    .then((searchedBooks) => {
+      if (searchedBooks.error)
+      {
+        this.resetSearch()
+        alert("This is an invalid search term. Try a different term.")
+      } else {
+
+        // Update the shelf for the searched and displayed books to match the books on the shelf
+        const updatedSearchedBooks = searchedBooks.map((searchedBook) => 
         {
-          this.resetSearch()
-          alert("This is an invalid search term. Try a different term.")
-        } else {
-          this.setState(() => ({
-            books
-          }))
-        }
-      }).catch(err => alert(err))
+          let isOnShelf = false;
+          this.props.books.forEach( (bookOnShelf) => {
+            if (searchedBook.id === bookOnShelf.id)
+            {
+             searchedBook.shelf = bookOnShelf.shelf 
+             isOnShelf = true;
+            }
+            if (!isOnShelf)
+            {
+              searchedBook.shelf = "none" 
+            }
+          })
+          return searchedBook;
+        })
+        this.setState(() => ({
+          searchedBooks: updatedSearchedBooks
+        }))
       }
+    }).catch(err => alert(err))
   }
 
   resetSearch = () => {
     this.setState(() => ({
-      books: []
+      searchedBooks: []
     })) 
   }
   
@@ -87,11 +109,11 @@ class SearchBooks extends Component{
         <div className="search-books-results">
           <ol className="books-grid">
             {
-              this.state.books.map((book) => (
+              this.state.searchedBooks.map((book) => (
                 <li key={book.id}>
                   <BookCard 
                     book={book}
-                    onUpdateShelves={this.props.onUpdateShelves}
+                    onUpdateShelf={this.props.onUpdateShelf}
                   />
                 </li>
               )
