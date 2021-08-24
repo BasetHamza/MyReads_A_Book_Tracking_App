@@ -33,6 +33,7 @@ class BookShelfChanger extends Component{
 
     extractShelf = (props) => {
         if (props.book.hasOwnProperty('shelf')){
+            console.log(props.book.shelf)
             return this.search(props.book.shelf)
         } else {
             return this.search("none")
@@ -79,11 +80,20 @@ class BookShelfChanger extends Component{
             this.setState(() => ({ 
                 selectedShelf: {
                     label: "None",
-                    value: {},
+                    value: {}
                 } 
             }
             ));
-            this.props.onDeleteBook(this.props.book);
+
+            /** 
+             * Delete a book if "none" is selected and only if this is coming from the library view
+             * not from the search results
+             * */ 
+
+            if (this.props.onDeleteBook){
+                this.props.onDeleteBook(this.props.book);
+            } 
+
         } else {
             const newShelf = this.search(e.target.value);
             this.setState(() => ({ 

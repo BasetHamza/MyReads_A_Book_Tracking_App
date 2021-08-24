@@ -24,13 +24,12 @@ class SearchBooks extends Component{
     if (this.state.query.length > 0)
     {
       console.log('true')
-      BooksAPI.search(this.state.query)
+      BooksAPI.search(this.state.query.trim())
       .then((books) => {
         this.setState(() => ({
           books
         }))
-      }) .catch(err => alert(err)) // TypeError: failed to fetch (the text may vary)
-
+      })
     } else
     {
       console.log('false')
