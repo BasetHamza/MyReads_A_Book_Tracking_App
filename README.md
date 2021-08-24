@@ -5,14 +5,16 @@ This project is the first project of the Udacity Frontend Nanodegree. The projec
 ## Installation Directions
 
 1. To install the application clone this git repository or download as zip file
-```
-$ git clone https://github.com/BasetHamza/MyReads_A_Book_Tracking_App.git
-```
+    ```
+    $ git clone https://github.com/BasetHamza/MyReads_A_Book_Tracking_App.git
+    ```
 2. Go into the application folder
 
 3. Install dependencies using ```npm``` or ```yarn``` command line tool
 
-```$ npm install``` or ```$ yarn install```
+    ```$ npm install``` 
+   or
+   ```$ yarn install```
 
 4. 
 
