@@ -12,8 +12,10 @@ This project is the first project of the Udacity Frontend Nanodegree. The projec
 
 3. Install dependencies using ```npm``` or ```yarn``` command line tool
 
-    ```$ npm install``` 
+    ```$ npm install```
+    
    or
+   
    ```$ yarn install```
 
 4. 
