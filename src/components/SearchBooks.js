@@ -1,19 +1,32 @@
 import React, {Component} from 'react' 
 import { Link } from 'react-router-dom'
+import _ from "lodash";
+
 import * as BooksAPI from '../utils/BooksAPI'
 import BookCard from './BookCard'
 
+
 class SearchBooks extends Component{
+
+/**
+ * The debounce implementation followed the code shown in:
+ * https://betterprogramming.pub/how-to-use-debounce-and-throttle-the-right-way-with-react-hooks-bf2c174728e
+ * 
+ **/ 
+
+  constructor(props) {
+    super(props);
+    this.props = props;
+    this.state = {
+      query: '',
+      books: []
+    }
+    this.debounceSearch = _.debounce(this.onChange, 300);
+  }
 
   state = {
     query: '',
     books: []
-  }
-
-  resetSearch = () => {
-    this.setState(() => ({
-      books: []
-    })) 
   }
 
   updateQuery = (query) => {
@@ -21,23 +34,38 @@ class SearchBooks extends Component{
       query: query
     })) 
 
-    if (this.state.query.length > 0)
+    if (this.state.query.trim())
     {
-      console.log('true')
+      this.debounceSearch();    
+    }
+  }
+  
+  onChange = () => {
+    if (this.state.query.trim() === "")
+    {
+      this.resetSearch()
+    } else {
       BooksAPI.search(this.state.query.trim())
       .then((books) => {
-        this.setState(() => ({
-          books
-        }))
-      })
-    } else
-    {
-      console.log('false')
-      this.resetSearch()
-    }
-
+        if (books.error)
+        {
+          this.resetSearch()
+          alert("This is an invalid search term. Try a different term.")
+        } else {
+          this.setState(() => ({
+            books
+          }))
+        }
+      }).catch(err => alert(err))
+      }
   }
 
+  resetSearch = () => {
+    this.setState(() => ({
+      books: []
+    })) 
+  }
+  
   render(){
     return(
       <div className="search-books">

@@ -33,6 +33,7 @@ class BookCard extends Component {
 
     render(){
         if (this.props.book.hasOwnProperty('shelf')){
+            console.log("This book as a shelf: ")
             console.log(this.props.book)
         }
         return (

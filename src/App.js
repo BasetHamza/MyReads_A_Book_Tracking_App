@@ -17,7 +17,9 @@ class BooksApp extends React.Component {
     this.setState((currentState) => ({
       updateCount: currentState.updateCount + 1
     }))
+
     BooksAPI.update(book,newShelf)
+    console.log("shelf updated")
   }
 
   render() {
